@@ -29,15 +29,13 @@ func (t *Tape) Read() int {
 	if ok {
 		return val
 	}
-	return 0 // valor padrão se a célula estiver vazia
+	return 0
 }
 
-// Move move a posição da fita para a esquerda ou para a direita
 func (t *Tape) Move(dir int) {
 	t.pos += dir
 }
 
-// busyBeaver simula a máquina de Turing
 func busyBeaver(steps int) int {
 	tape := NewTape()
 	state := A
@@ -47,33 +45,33 @@ func busyBeaver(steps int) int {
 		switch state {
 		case A:
 			if tape.Read() == 0 {
-				tape.Write(1) // escreve 1
-				tape.Move(1)  // move para a direita
-				state = B     // muda para o estado B
+				tape.Write(1)
+				tape.Move(1)
+				state = B
 			} else {
-				tape.Write(0) // escreve 0
-				tape.Move(-1) // move para a esquerda
-				state = HALT  // muda para o estado de parada
+				tape.Write(0)
+				tape.Move(-1)
+				state = HALT
 			}
 		case B:
 			if tape.Read() == 0 {
-				tape.Write(1) // escreve 1
-				tape.Move(-1) // move para a esquerda
-				state = C     // muda para o estado C
+				tape.Write(1)
+				tape.Move(-1)
+				state = C
 			} else {
-				tape.Write(1) // escreve 1
-				tape.Move(1)  // move para a direita
-				state = HALT  // muda para o estado de parada
+				tape.Write(1)
+				tape.Move(1)
+				state = HALT
 			}
 		case C:
 			if tape.Read() == 0 {
-				tape.Write(1) // escreve 1
-				tape.Move(1)  // move para a direita
-				state = HALT  // muda para o estado de parada
+				tape.Write(1)
+				tape.Move(1)
+				state = HALT
 			} else {
-				tape.Write(0) // escreve 0
-				tape.Move(-1) // move para a esquerda
-				state = A     // volta para o estado A
+				tape.Write(0)
+				tape.Move(-1)
+				state = A
 			}
 		}
 
@@ -87,7 +85,7 @@ func busyBeaver(steps int) int {
 }
 
 func main() {
-	steps := 100 // Defina o número máximo de passos permitidos
+	steps := 100
 	operations := busyBeaver(steps)
 	fmt.Printf("A máquina executou %d operações antes de parar\n", operations)
 }
